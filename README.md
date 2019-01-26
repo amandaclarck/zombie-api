@@ -1,24 +1,5 @@
-# README
+Welcome to the end of the world!
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This program is going to save your life (only if you're a survivor)
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Steps to setting up your environment to save your life:
