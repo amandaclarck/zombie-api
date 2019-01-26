@@ -33,6 +33,8 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_bot'
   gem 'pry'
+  gem 'shoulda-matchers', '4.0.0.rc1'
+  gem 'rails-controller-testing' # If you are using Rails 5.x
 end
 
 group :development do
