@@ -1,5 +1,5 @@
 class Survivor < ApplicationRecord
-  has_many :resources
+  has_and_belongs_to_many :resources
 
 	validates :name, presence: true
 	validates :age, presence: true
