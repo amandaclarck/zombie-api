@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190126002402) do
+ActiveRecord::Schema.define(version: 20190127024038) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,13 @@ ActiveRecord::Schema.define(version: 20190126002402) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "resources_survivors", force: :cascade do |t|
+    t.bigint "resource_id"
+    t.bigint "survivor_id"
+    t.index ["resource_id"], name: "index_resources_survivors_on_resource_id"
+    t.index ["survivor_id"], name: "index_resources_survivors_on_survivor_id"
+  end
+
   create_table "survivors", force: :cascade do |t|
     t.string "name"
     t.integer "age"
@@ -29,11 +36,10 @@ ActiveRecord::Schema.define(version: 20190126002402) do
     t.boolean "infected", default: false
     t.float "latitude"
     t.float "longitude"
-    t.bigint "resource_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["resource_id"], name: "index_survivors_on_resource_id"
   end
 
-  add_foreign_key "survivors", "resources"
+  add_foreign_key "resources_survivors", "resources"
+  add_foreign_key "resources_survivors", "survivors"
 end
