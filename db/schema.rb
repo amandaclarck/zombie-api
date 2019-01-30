@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190127024038) do
+ActiveRecord::Schema.define(version: 20190129234713) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,13 @@ ActiveRecord::Schema.define(version: 20190127024038) do
     t.bigint "survivor_id"
     t.index ["resource_id"], name: "index_resources_survivors_on_resource_id"
     t.index ["survivor_id"], name: "index_resources_survivors_on_survivor_id"
+  end
+
+  create_table "survivor_infections", force: :cascade do |t|
+    t.bigint "survivor_indicator_id"
+    t.bigint "survivor_infected_id"
+    t.index ["survivor_indicator_id"], name: "index_survivor_infections_on_survivor_indicator_id"
+    t.index ["survivor_infected_id"], name: "index_survivor_infections_on_survivor_infected_id"
   end
 
   create_table "survivors", force: :cascade do |t|
