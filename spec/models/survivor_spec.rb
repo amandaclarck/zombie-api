@@ -6,8 +6,6 @@ RSpec.describe Survivor, type: :model do
 
 	  it { should validate_presence_of(:age) }
 
-	  it { should validate_presence_of(:gender) }
-
 	  describe 'validates presence of location' do
   		it { should validate_presence_of(:latitude) }
 			it { should validate_presence_of(:longitude) }
