@@ -1,15 +1,16 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Survivor, type: :model do
-	context '#validation' do
-	  it { should validate_presence_of(:name) }
+  context '#validation' do
+    it { should validate_presence_of(:name) }
 
-	  it { should validate_presence_of(:age) }
+    it { should validate_presence_of(:age) }
 
-	  describe 'validates presence of location' do
-  		it { should validate_presence_of(:latitude) }
-			it { should validate_presence_of(:longitude) }
-	  end
-	end
+    describe 'validates presence of location' do
+      it { should validate_presence_of(:latitude) }
+      it { should validate_presence_of(:longitude) }
+    end
+  end
 end
-
