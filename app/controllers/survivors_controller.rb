@@ -9,19 +9,16 @@ class SurvivorsController < ApplicationController
     render json: { data: survivor_id }
   end
 
-  def create
-    @survivor = Survivor.new(survivor_params)
-    @survivor.resources << Resource.where(id: params[:resources].map { |r| r['id'] })
 
-    if @survivor.validate_gender || @survivor.validate_resources
-      render json: { status: 'ERROR', message: @survivor.errors }, status: :unprocessable_entity
+  def create
+    @survivor = SurvivorService.create(survivor_params)
+	  @survivor.resources << Resource.where(id: params[:resources].map { |r| r['id'] })
+
+    if @survivor.valid? && @survivor.save
+    	render json: { status: 201, message: 'Survivor created!', data: @survivor }, status: :created
     else
-      if @survivor.save
-        render json: { status: 'SUCCESS', message: 'Survivor created!', data: @survivor }, status: :ok
-      else
-        render json: { status: 'ERROR', message: 'Survivor not created', data: @survivor.errors }, status: :unprocessable_entity
-      end
-    end
+    	render json: { status: 422, message: 'Survivor not created', data: @survivor.errors}, status: :unprocessable_entity
+     end
   end
 
   def update
