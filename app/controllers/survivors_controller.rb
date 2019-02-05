@@ -12,22 +12,26 @@ class SurvivorsController < ApplicationController
 
   def create
     @survivor = SurvivorService.create(survivor_params)
-	  @survivor.resources << Resource.where(id: params[:resources].map { |r| r['id'] })
+    @resources = Resource.where(id: params[:resources].map { |r| r['id'] })
+    
+    if @resources.length > 0
+		  @survivor.resources << @resources
+    end
 
-    if @survivor.valid? && @survivor.save
-    	render json: { status: 201, message: 'Survivor created!', data: @survivor }, status: :created
-    else
-    	render json: { status: 422, message: 'Survivor not created', data: @survivor.errors}, status: :unprocessable_entity
-     end
+  	if @survivor.save
+  		render json: { status: 201, message: 'Survivor created!', data: @survivor }, status: :created
+  	else
+  		render json: { status: 422, message: 'Survivor not created', data: @survivor.errors}, status: :unprocessable_entity
+   	end
   end
 
   def update
-    @survivor = Survivor.find(params[:survivor_infected])
+    @survivor = Survivor.find(params[:id])
 
     if @survivor.update(survivor_update_params)
-      render json: { status: 'SUCCESS', message: 'Survivor updated!', data: @survivor }, status: :ok
+      render json: { status: 201, message: 'Survivor updated!', data: @survivor }, status: :ok
     else
-      render json: { status: 'ERROR', message: 'Survivor not updated', data: @survivor.errors }, status: :unprocessable_entity
+      render json: { status: 422, message: 'Survivor not updated', data: @survivor.errors }, status: :unprocessable_entity
     end
   end
 
@@ -55,11 +59,11 @@ class SurvivorsController < ApplicationController
   private
 
   def survivor_params
-    params.require(:survivor).permit(:name, :age, :gender, :latitude, :longitude, resources: [])
+    params.require(:survivor).permit(:name, :age, :gender, :latitude, :longitude, resources: []) #infected
   end
 
   def survivor_update_params
-    params.require(:survivor).permit(:name, :age, :gender, :latitude, :longitude, :infected)
+    params.require(:survivor).permit(:latitude, :longitude, :infected)
   end
 
   def survivor_id
