@@ -26,8 +26,7 @@ class SurvivorsController < ApplicationController
   end
 
   def update
-    @survivor = Survivor.find(params[:id])
-
+    survivor_id
     if @survivor.update(survivor_update_params)
       render json: { status: 201, message: 'Survivor updated!', data: @survivor }, status: :ok
     else
@@ -36,24 +35,13 @@ class SurvivorsController < ApplicationController
   end
 
   def mark_as_infected
-    @survivor_indicator = Survivor.find(params[:survivor_id])
-    @survivor_infected = Survivor.find(params[:survivor_infected])
-
-    @survivor_ids = []
-    @survivor_ids << @survivor_indicator
-    @survivor_ids << @survivor_infected
-
-    @survivor_infections = []
-    @survivor_infections = SurvivorInfection.where(survivor_indicator_id: @survivor_ids.map(&:id))
-
-    @survivor = Survivor.find(params[:survivor_id])
-
-    if !@survivor_infections.empty?
-      render json: { status: 'ERROR', message: 'Can not be marked as infected by the same survivor', data: @survivor.errors }, status: :unprocessable_entity
+    @survivor = SurvivorService.mark_as_infected(params)
+    if @survivor
+    	update
     else
-      SurvivorInfection.create(survivor_indicator_id: @survivor_ids[0].id, survivor_infected_id: @survivor_ids[1].id)
-      update
-    end
+    	render json: { status: 422, message: 'Can not be marked as infected by the same survivor', data: @survivor.errors},
+      status: :unprocessable_entity
+  	end
   end
 
   private
