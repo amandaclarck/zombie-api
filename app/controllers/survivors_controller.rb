@@ -36,13 +36,18 @@ class SurvivorsController < ApplicationController
 
   def mark_as_infected
     @survivor = SurvivorService.mark_as_infected(params)
-    if @survivor
+
+    if @survivor.errors.empty?
     	update
     else
-    	render json: { status: 422, message: 'Can not be marked as infected by the same survivor', data: @survivor.errors},
-      status: :unprocessable_entity
+    	render json: { status: 422, data: @survivor.errors}, status: :unprocessable_entity
   	end
-  end
+
+  	rescue ActiveRecord::RecordNotFound => e
+			    render json: {
+			      error: e.to_s
+			    }, status: :not_found
+	end
 
   private
 
