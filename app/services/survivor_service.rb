@@ -30,19 +30,23 @@ class SurvivorService
   	end
 
 
+			
 		def exchange_resources(params)
 			@survivor = Survivor.find(params[:id])
-			@survivor_to_exchange = Survivor.find(params[:survivor_id_to_exchange]).where(infected: true)
-			
+			@survivor_to_exchange = Survivor.where('id = ?', params[:survivor_id_to_exchange]).where(infected: true)
 			@survivor_points = Survivor.joins(:resources, :survivor_infections).where(id: @survivor.id).sum(:points)
 			@survivor_to_exchange_points = Survivor.joins(:resources, :survivor_infections)
-			.where(id: @survivor_to_exchange.id).sum(:points)
+			.where(id: @survivor_to_exchange.ids).sum(:points)
 
-			if @survivor.eql? @survivor_to_exchange_points
-				puts true
+			if @survivor_points.eql? @survivor_to_exchange_points
+				 #@survivor.resources << @survivor_to_exchange_points
+				 Survivor.find(id: @survivor_to_exchange.id)
+				 puts @survivor_to_exchange.id
 			else
       	@survivor.errors.add(:id, message: 'The sum of points is not equal')
 			end
+			
+
 			#select * from survivors where id = params[:id] //voce
 			#Select * From survivors where infected = true and id = survivor_q_quero_trocar pontos
 			#if soma de pontos do survivor_q_quero_etc != do survivor_voce => erro
