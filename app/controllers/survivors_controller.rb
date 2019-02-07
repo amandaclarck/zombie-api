@@ -48,12 +48,12 @@ class SurvivorsController < ApplicationController
 			    }, status: :not_found
 	end
 
-  def exchange_resources(params)
+  def exchange_resources
     @survivor = SurvivorService.exchange_resources(params)
-    if @survivor.errors.empty?
-      update
-    end
-    
+    #if @survivor.errors.empty?
+     # update
+    #end
+    render json: {data: @survivor}
     rescue ActiveRecord::RecordNotFound => e
           render json: {
             error: e.to_s
