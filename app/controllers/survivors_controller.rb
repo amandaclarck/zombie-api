@@ -9,7 +9,6 @@ class SurvivorsController < ApplicationController
     render json: { data: survivor_id }
   end
 
-
   def create
     @survivor = SurvivorService.create(survivor_params)
     @resources = Resource.where(id: params[:resources].map { |r| r['id'] })
@@ -48,6 +47,18 @@ class SurvivorsController < ApplicationController
 			      error: e.to_s
 			    }, status: :not_found
 	end
+
+  def exchange_resources(params)
+    @survivor = SurvivorService.exchange_resources(params)
+    if @survivor.errors.empty?
+      update
+    end
+    
+    rescue ActiveRecord::RecordNotFound => e
+          render json: {
+            error: e.to_s
+          }, status: :not_found
+  end
 
   private
 
