@@ -14,14 +14,11 @@ gem 'rails', '5.2.2'
 
 group :development, :test do
   gem 'byebug'
-  gem 'factory_bot'
   gem 'pg'
   gem 'pry'
   gem 'rails-controller-testing'
   gem 'rspec-rails'
   gem 'shoulda-matchers', '4.0.0.rc1'
-  gem 'database_cleaner'
-  gem 'simplecov'
 end
 
 group :development do
