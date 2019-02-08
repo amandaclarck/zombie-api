@@ -5,7 +5,7 @@
 ## Steps to setting up your environment to save your life:
 
 **This project is using Rails 5 and Ruby 2.3.1 and Postgres 9.4**
-*---------------------*
+<br>*---------------------*
 - After downloading this project, run _bundle install_ and make sure all gems are installed 
 - Set your USER and PASSWORD on your _~/.bash_rc_ and then run _source ~/.bash_rc_ to load your env variables. 
 		Ex: export USER='your_user' 
@@ -17,19 +17,19 @@
 
 ## Survivor
 	- *Index:*
-		``` 
+		```
 			get localhost:3000/survivors
 			Success: status 200
-		```
+		
 
 	- *Show:*
-		```
+		
 			get localhost:3000/survivors/:id
 			Success: status 200
-		```
+		
 
 	- *Create:*
-		``` 
+		 
 			post localhost:3000/survivors
 
 			{
@@ -43,9 +43,9 @@
 
 			Success: status 201
 			Fail: status 422
-		```
+		
 	- *Update:*
-		```
+		
 			put localhost:3000/survivors/:id
 
 			{
@@ -56,10 +56,10 @@
 
 			Success: status 200
 			Fail: status 422
-		``` 
+		 
 
 	- *Mark as infected:*
-		```
+		
 			post localhost:3000/mark_as_infected
 
 			{
@@ -72,9 +72,9 @@
 
 			Success: status 200
 			Fail: status 422
-		```
+		
 	- *Exchange resources:*
-		```
+		
 			post localhost:3000/exchange_resources
 			{
 				"id": 42,
@@ -83,22 +83,22 @@
 
 			Success: status 200
 			Fail: status 422
-		```
+		
 ## Resources
 	- *Index:*
-		```
+		
 			get localhost:3000/resources
 			Success: status 200
-		```
+		
 		- *Resources per survivor:*
-		```
+		
 			localhost:3000/resources_per_survivor
 			Success: status 200
-		```
+		
 
 ## Reports
 	- *Index*
-		```
+		
 			localhost:3000/reports
-		```
+	```
 	If you have any problem or even some question about the project feel free to contact me at *amanda.lssc@gmail.com*
