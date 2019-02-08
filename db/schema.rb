@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_190_129_234_713) do
+ActiveRecord::Schema.define(version: 20_190_208_011_243) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
@@ -46,8 +46,11 @@ ActiveRecord::Schema.define(version: 20_190_129_234_713) do
     t.float 'longitude'
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
+    t.bigint 'survivor_infection_id'
+    t.index ['survivor_infection_id'], name: 'index_survivors_on_survivor_infection_id'
   end
 
   add_foreign_key 'resources_survivors', 'resources'
   add_foreign_key 'resources_survivors', 'survivors'
+  add_foreign_key 'survivors', 'survivor_infections'
 end
