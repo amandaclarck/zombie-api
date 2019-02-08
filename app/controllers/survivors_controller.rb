@@ -2,11 +2,11 @@
 
 class SurvivorsController < ApplicationController
   def index
-    render json: { data: Survivor.all }
+    render json: { status: 200, data: Survivor.all }, status: :ok
   end
 
   def show
-    render json: { data: survivor_id }
+    render json: { status: 200, data: survivor_id }, status: :ok
   end
 
   def create
@@ -22,7 +22,7 @@ class SurvivorsController < ApplicationController
   def update
     survivor_id
     if @survivor.update(survivor_update_params)
-      render json: { status: 201, message: 'Survivor updated!', data: @survivor }, status: :ok
+      render json: { status: 200, message: 'Survivor updated!', data: @survivor }, status: :ok
     else
       render json: { status: 422, message: 'Survivor not updated', data: @survivor.errors }, status: :unprocessable_entity
     end
