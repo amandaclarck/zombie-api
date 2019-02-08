@@ -2,6 +2,7 @@
 
 class SurvivorService
   class << self
+    $const = 0
     def create(params)
       @survivor = Survivor.new(params)
       @resources = Resource.where(id: params[:resources])
@@ -35,12 +36,16 @@ class SurvivorService
       @survivor_to_exchange_points = Survivor.joins(:resources, :survivor_infections)
                                              .where(id: @survivor_to_exchange.ids).sum(:points)
 
-      if @survivor_points.eql? @survivor_to_exchange_points
-        ActiveRecord::Base.connection.execute("Delete from Resources_Survivors Where Survivor_Id = #{@survivor.id}")
-        @resources = Resource.where(id: @survivor_to_exchange.map(&:resource_ids))
-        @survivor.resources << @resources
+      if @survivor_points > $const && @survivor_to_exchange_points > $const
+        if @survivor_points.eql? @survivor_to_exchange_points
+          ActiveRecord::Base.connection.execute("Delete from Resources_Survivors Where Survivor_Id = #{@survivor.id}")
+          @resources = Resource.where(id: @survivor_to_exchange.map(&:resource_ids))
+          @survivor.resources << @resources
+        else
+          @survivor.errors.add(:sum_points, message: 'The sum of points between the survivors is not equal')
+        end
       else
-        @survivor.errors.add(:sum_points, message: 'The sum of points between the survivors is not equal')
+        @survivor.errors.add(:sum_points, message: 'The sum of points must be higher than zero')
       end
       @survivor
     end
