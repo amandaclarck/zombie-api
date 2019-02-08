@@ -7,14 +7,14 @@ class Survivor < ApplicationRecord
   has_many :survivor_infections, class_name: 'SurvivorInfection', foreign_key: 'survivor_infected_id'
   accepts_nested_attributes_for :resources
 
-	validates :name, presence: true, on: :create
-	validates :age, presence: true, on: :create
-	validates :latitude, presence: true, on: :create
-	validates :latitude, presence: true, on: :update 
-	validates :longitude, presence: true, on:  :create
-	validates :longitude, presence: true, on: :update 
+  validates :name, presence: true, on: :create
+  validates :age, presence: true, on: :create
+  validates :latitude, presence: true, on: :create
+  validates :latitude, presence: true, on: :update
+  validates :longitude, presence: true, on: :create
+  validates :longitude, presence: true, on: :update
 
-	validates :infected, presence: true, on: :update
-	validates :gender, presence: true, inclusion: { in: %w(F M U), message: "Gender must be F, M or U" }, on: :create
-	validates :resources, presence: true, on: :create
+  # validates :infected, presence: true, on: :update
+  validates :gender, presence: true, inclusion: { in: %w[F M U], message: 'Gender must be F, M or U' }, on: :create
+  validates :resources, presence: true, on: :create
 end
