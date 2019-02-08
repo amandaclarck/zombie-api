@@ -2,12 +2,13 @@
 
 Rails.application.routes.draw do
   # survivors
-  get 'index', action: :index, to: 'survivors#index'
-  get 'show/:id', action: :show, to: 'survivors#show'
+  get 'survivors', action: :index, to: 'survivors#index'
+  get 'survivors/:id', action: :show, to: 'survivors#show'
   post 'create', action: :create, to: 'survivors#create'
   post 'update', action: :update, to: 'survivors#update'
   post 'mark_as_infected', action: :mark_as_infected, to: 'survivors#mark_as_infected'
   post 'exchange_resources', action: :exchange_resources, to: 'survivors#exchange_resources'
+  put 'survivors/:id', action: :update, to: 'survivors#update'
 
   # resources
   get 'resources', action: :index, to: 'resources#index'
