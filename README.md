@@ -8,57 +8,57 @@
 <br>*---------------------*
 - After downloading this project, run _bundle install_ and make sure all gems are installed 
 - Set your USER and PASSWORD on your _~/.bash_rc_ and then run _source ~/.bash_rc_ to load your env variables. 
-		Ex: export USER='your_user' 
-				export PASSWORD='your_pass' 
+			<br>Ex: export USER='your_user' 
+			<br>export PASSWORD='your_pass' 
 - Run _bundle exec bin/setup_ Make sure to check if all resources are created on the db. If not, just copy the command lines from seeds.rb 
 - Type psql zombie_development on the command window and type the two lines below:
-		- _ALTER TABLE Survivor_Infections ADD CONSTRAINT FK_Survivor_Indicator_Id  FOREIGN KEY (Survivor_Indicator_Id) REFERENCES Survivors (Id) MATCH FULL;_
-		- _ALTER TABLE Survivor_Infections ADD CONSTRAINT FK_Survivor_Infected_Id  FOREIGN KEY (Survivor_Infected_Id) REFERENCES Survivors (Id) MATCH FULL;_
+		<br>- _ALTER TABLE Survivor_Infections ADD CONSTRAINT FK_Survivor_Indicator_Id  FOREIGN KEY (Survivor_Indicator_Id) REFERENCES Survivors (Id) MATCH FULL;_
+		<br>- _ALTER TABLE Survivor_Infections ADD CONSTRAINT FK_Survivor_Infected_Id  FOREIGN KEY (Survivor_Infected_Id) REFERENCES Survivors (Id) MATCH FULL;_
 
 ## Survivor
-	- *Index:*
+	- Index:
 		
 			get localhost:3000/survivors
 			Success: status 200
 		
 
-	- *Show:*
+	- Show:
 		
 			get localhost:3000/survivors/:id
 			Success: status 200
 		
 
-	- *Create:*
+	- Create:
 		 
 			post localhost:3000/survivors
 
 			{
-		    "name": "Survivor",
-		    "age": 48,
-		    "gender": "U",
-		    "latitude": 10,
-		    "longitude": 202,
-		    "resources": [1,2,3]
+			    "name": "Survivor",
+			    "age": 48,
+			    "gender": "U",
+			    "latitude": 10,
+			    "longitude": 202,
+			    "resources": [1,2,3]
 			}
 
 			Success: status 201
 			Fail: status 422
 		
-	- *Update:*
+	- Update:
 		
 			put localhost:3000/survivors/:id
 
 			{
-		    "latitude": 10,
-		    "longitude": 202,
-		    "infected": true
+			    "latitude": 10,
+			    "longitude": 202,
+			    "infected": true
 			}
 
 			Success: status 200
 			Fail: status 422
 		 
 
-	- *Mark as infected:*
+	- Mark as infected:
 		
 			post localhost:3000/mark_as_infected
 
@@ -73,7 +73,7 @@
 			Success: status 200
 			Fail: status 422
 		
-	- *Exchange resources:*
+	- Exchange resources:
 		
 			post localhost:3000/exchange_resources
 			{
@@ -85,19 +85,19 @@
 			Fail: status 422
 		
 ## Resources
-	- *Index:*
+	- Index:
 		
 			get localhost:3000/resources
 			Success: status 200
 		
-		- *Resources per survivor:*
+	- Resources per survivor:
 		
 			localhost:3000/resources_per_survivor
 			Success: status 200
 		
 
 ## Reports
-	- *Index*
+	- Index
 		
 			localhost:3000/reports
 	
