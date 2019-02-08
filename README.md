@@ -17,7 +17,7 @@
 
 ## Survivor
 	- *Index:*
-		```
+		
 			get localhost:3000/survivors
 			Success: status 200
 		
@@ -100,5 +100,5 @@
 	- *Index*
 		
 			localhost:3000/reports
-	```
+	
 	If you have any problem or even some question about the project feel free to contact me at *amanda.lssc@gmail.com*
