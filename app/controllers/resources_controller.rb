@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
 class ResourcesController < ApplicationController
-	def index
-		render json: { data: Resource.all }
-	end
+  def index
+    render json: { data: Resource.all }, status: :ok
+  end
 
-	def resources_per_survivor
-		render json: {data: Resource.joins(:survivors).where(id: params[:survivor_id])}
-	end
+  def resources_per_survivor
+    data = ResourceService.resources_per_survivor(params)
+    render json: { data: data }, status: :ok
+  end
 end
