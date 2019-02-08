@@ -9,8 +9,11 @@ class Survivor < ApplicationRecord
 
 	validates :name, presence: true, on: :create
 	validates :age, presence: true, on: :create
-	validates :latitude, presence: true, on: :create, on: :update 
-	validates :longitude, presence: true, on:  :create, on: :update 
+	validates :latitude, presence: true, on: :create
+	validates :latitude, presence: true, on: :update 
+	validates :longitude, presence: true, on:  :create
+	validates :longitude, presence: true, on: :update 
+
 	validates :infected, presence: true, on: :update
 	validates :gender, presence: true, inclusion: { in: %w(F M U), message: "Gender must be F, M or U" }, on: :create
 	validates :resources, presence: true, on: :create
